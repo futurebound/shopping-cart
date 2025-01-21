@@ -1,14 +1,15 @@
-import App from "./App";
+import App from './App'
+import ShopPage from './components/ShopPage'
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     element: <App />,
   },
-  // {
-  //   path: "profile/:name",
-  //   element: <Profile />,
-  // },
-];
+  {
+    path: '/shop',
+    element: <ShopPage />,
+  },
+]
 
-export default routes;
+export default routes
