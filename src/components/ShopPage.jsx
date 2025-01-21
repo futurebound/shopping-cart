@@ -8,6 +8,7 @@ export default function ShopPage() {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [cartItems, setCartItems] = useState({})
 
   useEffect(() => {
     loadProducts()
@@ -24,6 +25,24 @@ export default function ShopPage() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const handleUpdateQuantity = (productId, delta) => {
+    setCartItems((prev) => {
+      const currentQty = prev[productId] || 0
+      const newQty = Math.max(0, currentQty + delta)
+
+      // if quantity reaches 0, remove [productID] from the cart
+      if (newQty === 0) {
+        const { [productId]: _, ...rest } = prev
+        return rest
+      }
+
+      return {
+        ...prev,
+        [productId]: newQty,
+      }
+    })
   }
 
   if (isLoading) {
@@ -49,7 +68,12 @@ export default function ShopPage() {
         <h1 className='mb-6 text-2xl font-bold'>Shop</h1>
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} quantity={0} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              quantity={cartItems[product.id] || 0}
+              onUpdateQuantity={handleUpdateQuantity}
+            />
           ))}
         </div>
       </div>
