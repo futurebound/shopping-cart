@@ -49,7 +49,7 @@ export default function ShopPage() {
         <h1 className='mb-6 text-2xl font-bold'>Shop</h1>
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} quantity={0} />
           ))}
         </div>
       </div>
