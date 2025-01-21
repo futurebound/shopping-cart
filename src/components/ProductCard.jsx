@@ -1,16 +1,22 @@
+import { useState } from 'react'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { MinusIcon, PlusIcon } from 'lucide-react'
 
-const ProductCard = ({ product, quantity = 0, onUpdateQuantity }) => {
+const ProductCard = ({ product, onAddToCart }) => {
+  const [selectedQuantity, setSelectedQuantity] = useState(1)
   const { id, title, price, image, description } = product
 
   const handleIncrement = () => {
-    onUpdateQuantity(id, 1)
+    setSelectedQuantity((prev) => Math.min(prev + 1, 99))
   }
 
   const handleDecrement = () => {
-    onUpdateQuantity(id, -1)
+    setSelectedQuantity((prev) => Math.max(prev - 1, 1))
+  }
+
+  const handleAddToCart = () => {
+    onAddToCart(id, selectedQuantity)
   }
 
   return (
@@ -45,21 +51,24 @@ const ProductCard = ({ product, quantity = 0, onUpdateQuantity }) => {
               size='icon'
               variant='outline'
               onClick={handleDecrement}
-              disabled={quantity === 0}
+              disabled={selectedQuantity === 0}
             >
               <MinusIcon className='h-4 w-4' />
             </Button>
-            <span className='w-8 text-center'>{quantity}</span>
+            <span className='w-8 text-center'>{selectedQuantity}</span>
             <Button
               size='icon'
               variant='outline'
               onClick={handleIncrement}
-              disabled={quantity >= 99}
+              disabled={selectedQuantity >= 99}
             >
               <PlusIcon className='h-4 w-4' />
             </Button>
           </div>
         </div>
+
+        {/* Add to Cart Button */}
+        <Button onClick={handleAddToCart}>Add to Cart</Button>
       </CardFooter>
     </Card>
   )

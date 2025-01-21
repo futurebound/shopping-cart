@@ -27,16 +27,11 @@ export default function ShopPage() {
     }
   }
 
-  const handleUpdateQuantity = (productId, delta) => {
+  const handleAddToCart = (productId, quantity) => {
+    console.log(`added productID: ${productId} quantity: ${quantity}`)
     setCartItems((prev) => {
       const currentQty = prev[productId] || 0
-      const newQty = Math.max(0, currentQty + delta)
-
-      // if quantity reaches 0, remove [productID] from the cart
-      if (newQty === 0) {
-        const { [productId]: _, ...rest } = prev
-        return rest
-      }
+      const newQty = currentQty + quantity
 
       return {
         ...prev,
@@ -71,8 +66,7 @@ export default function ShopPage() {
             <ProductCard
               key={product.id}
               product={product}
-              quantity={cartItems[product.id] || 0}
-              onUpdateQuantity={handleUpdateQuantity}
+              onAddToCart={handleAddToCart}
             />
           ))}
         </div>
