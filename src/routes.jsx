@@ -1,5 +1,5 @@
 import App from './App'
-import ShopPage from './components/ShopPage'
+import ShopPage from './pages/ShopPage'
 
 const routes = [
   {

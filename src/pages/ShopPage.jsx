@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 
-import NavBar from './NavBar'
-import ProductCard from './ProductCard'
+import NavBar from '../components/NavBar'
+import ProductCard from '../components/ProductCard'
 import { fetchProducts } from '@/utils/api'
 
-export default function ShopPage() {
+export default function ShopPage({ cartItems, onAddToCart }) {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [cartItems, setCartItems] = useState({})
+  // const [cartItems, setCartItems] = useState({})
 
   useEffect(() => {
     loadProducts()
@@ -27,18 +27,18 @@ export default function ShopPage() {
     }
   }
 
-  const handleAddToCart = (productId, quantity) => {
-    console.log(`added productID: ${productId} quantity: ${quantity}`)
-    setCartItems((prev) => {
-      const currentQty = prev[productId] || 0
-      const newQty = currentQty + quantity
+  // const handleAddToCart = (productId, quantity) => {
+  //   console.log(`added productID: ${productId} quantity: ${quantity}`)
+  //   setCartItems((prev) => {
+  //     const currentQty = prev[productId] || 0
+  //     const newQty = currentQty + quantity
 
-      return {
-        ...prev,
-        [productId]: newQty,
-      }
-    })
-  }
+  //     return {
+  //       ...prev,
+  //       [productId]: newQty,
+  //     }
+  //   })
+  // }
 
   if (isLoading) {
     return (
@@ -66,7 +66,7 @@ export default function ShopPage() {
             <ProductCard
               key={product.id}
               product={product}
-              onAddToCart={handleAddToCart}
+              onAddToCart={onAddToCart}
             />
           ))}
         </div>
