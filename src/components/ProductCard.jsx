@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { MinusIcon, PlusIcon } from 'lucide-react'
+import CartContext from '@/contexts/CartContext'
 
-const ProductCard = ({ product, onAddToCart }) => {
+const ProductCard = ({ product }) => {
   const [selectedQuantity, setSelectedQuantity] = useState(1)
   const { id, title, price, image, description } = product
+  const { addToCart } = useContext(CartContext)
 
   const handleIncrement = () => {
     setSelectedQuantity((prev) => Math.min(prev + 1, 99))
@@ -16,7 +18,8 @@ const ProductCard = ({ product, onAddToCart }) => {
   }
 
   const handleAddToCart = () => {
-    onAddToCart(id, selectedQuantity)
+    console.log(`handleAddToCart() called, calling addToCart()...`)
+    addToCart(id, selectedQuantity)
   }
 
   return (

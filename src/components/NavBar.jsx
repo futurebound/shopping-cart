@@ -29,7 +29,7 @@ export default function NavBar() {
         <div className='flex items-center'>
           <ShoppingCart className='h-5 w-5 text-white' />
           {getTotalItems() > 0 && (
-            <span className='bg-primary ml-2 rounded-full px-2 py-0.5 text-sm text-white'>
+            <span className='bg-primary ml-2 rounded-full px-2 py-0.5 text-sm text-red-500'>
               {getTotalItems()}
             </span>
           )}
@@ -37,7 +37,6 @@ export default function NavBar() {
         <Button
           className='text-white'
           onClick={() => alert('Checkout coming soon!')}
-          disabled={getTotalItems() === 0}
         >
           Checkout
         </Button>

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 
-import NavBar from '../components/NavBar'
 import ProductCard from '../components/ProductCard'
 import { fetchProducts } from '@/utils/api'
 
@@ -57,19 +56,16 @@ export default function ShopPage({ cartItems, onAddToCart }) {
   }
 
   return (
-    <div>
-      <NavBar />
-      <div className='container mx-auto px-4 py-8'>
-        <h1 className='mb-6 text-2xl font-bold'>Shop</h1>
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onAddToCart={onAddToCart}
-            />
-          ))}
-        </div>
+    <div className='container mx-auto px-4 py-8'>
+      <h1 className='mb-6 text-2xl font-bold'>Shop</h1>
+      <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onAddToCart={onAddToCart}
+          />
+        ))}
       </div>
     </div>
   )

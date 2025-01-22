@@ -1,5 +1,5 @@
+import { Outlet } from 'react-router-dom'
 import NavBar from './components/NavBar'
-import ShopPage from './pages/ShopPage'
 import CartContextProvider from '@/providers/CartProvider'
 
 function App() {
@@ -8,13 +8,7 @@ function App() {
       <CartContextProvider>
         <NavBar />
         <main className='flex-grow'>
-          {/* <Routes>
-          <Route path='/' element={<App />} />
-          <Route
-            path='/shop'
-            element={<ShopPage cartItems={cartItems} onAddToCart={addToCart} />}
-          />
-        </Routes> */}
+          <Outlet />
         </main>
       </CartContextProvider>
     </>

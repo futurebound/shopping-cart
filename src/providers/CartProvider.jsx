@@ -11,6 +11,9 @@ const CartContextProvider = ({ children }) => {
     setCartItems((prev) => {
       const currentQty = prev[productId] || 0 // default 0 for empty cart
       const newQty = currentQty + quantity
+      console.log(
+        `added productId: ${productId} quantity: ${quantity} to cart, newQty: ${newQty}`
+      )
 
       return {
         ...prev,
