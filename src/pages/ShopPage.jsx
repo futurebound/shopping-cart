@@ -3,11 +3,10 @@ import { useState, useEffect } from 'react'
 import ProductCard from '../components/ProductCard'
 import { fetchProducts } from '@/utils/api'
 
-export default function ShopPage({ cartItems, onAddToCart }) {
+export default function ShopPage() {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
-  // const [cartItems, setCartItems] = useState({})
 
   useEffect(() => {
     loadProducts()
@@ -25,19 +24,6 @@ export default function ShopPage({ cartItems, onAddToCart }) {
       setIsLoading(false)
     }
   }
-
-  // const handleAddToCart = (productId, quantity) => {
-  //   console.log(`added productID: ${productId} quantity: ${quantity}`)
-  //   setCartItems((prev) => {
-  //     const currentQty = prev[productId] || 0
-  //     const newQty = currentQty + quantity
-
-  //     return {
-  //       ...prev,
-  //       [productId]: newQty,
-  //     }
-  //   })
-  // }
 
   if (isLoading) {
     return (
@@ -60,11 +46,7 @@ export default function ShopPage({ cartItems, onAddToCart }) {
       <h1 className='mb-6 text-2xl font-bold'>Shop</h1>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onAddToCart={onAddToCart}
-          />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>
